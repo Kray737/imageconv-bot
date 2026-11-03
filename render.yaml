@@ -1,11 +1,12 @@
 services:
-  - type: worker
+  - type: web
     name: imageconv-bot
     runtime: python
     plan: free
     region: oregon
     buildCommand: pip install -r requirements.txt
-    startCommand: python bot.py
+    startCommand: python entrypoint.py
+    healthCheckPath: /health
     repo: https://github.com/Kray737/imageconv-bot
     branch: main
     autoDeployTrigger: commit
