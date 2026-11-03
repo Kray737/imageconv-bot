@@ -1,2 +1,33 @@
-# imageconv-bot
-Telegram bot for image conversion: formats, grayscale, transparent background, watermark, resize, crop, compression
+# ImageConv Bot
+
+Telegram-бот для конвертации изображений. Всё делается кнопками прямо в чате.
+
+## Возможности
+
+- Конвертация в PNG / JPG / WEBP
+- Чёрно-белое изображение
+- Прозрачный фон (убирает белые/светлые области)
+- Водяной знак
+- Ресайз (до 1920 px по большей стороне)
+- Кроп 1:1 (центр)
+- Кроп по координатам: `x1 y1 x2 y2`
+- Сжатие до целевого веса в КБ (качество подбирается автоматически)
+- Выбор качества 50 / 70 / 85 / 95 / 100
+- Превью перед сохранением
+
+## Переменные окружения
+
+- `BOT_TOKEN` — токен бота от @BotFather (обязателен)
+
+## Запуск
+
+```bash
+pip install -r requirements.txt
+export BOT_TOKEN=your_token
+python bot.py
+```
+
+## Деплой на Render
+
+Репозиторий уже содержит `render.yaml` — на Render выберите Blueprint, укажите
+`BOT_TOKEN` в Environment, и бот поднимется сам.
