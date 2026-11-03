@@ -4,7 +4,7 @@ services:
     runtime: python
     plan: free
     region: oregon
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install --prefer-binary -r requirements.txt
     startCommand: python entrypoint.py
     healthCheckPath: /health
     repo: https://github.com/Kray737/imageconv-bot
@@ -13,3 +13,5 @@ services:
     envVars:
       - key: BOT_TOKEN
         sync: false
+      - key: PYTHON_VERSION
+        value: 3.12.8
