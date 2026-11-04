@@ -6,7 +6,7 @@ import logging
 
 from aiogram import Bot, Dispatcher, F, types
 from aiogram.filters import Command
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, BufferedInputFile
 
 from PIL import Image, ImageOps, ImageDraw, ImageFont
 
@@ -247,7 +247,7 @@ async def on_cb(q):
         prev.save(prev_buf, "JPEG", quality=80)
         prev_buf.seek(0)
         await q.message.answer_photo(
-            prev_buf,
+            BufferedInputFile(prev_buf.getvalue(), filename=file_name(p["fmt"])),
             caption=f"Превью \u2022 {p['fmt']} \u2022 качество {p['quality']}%",
             reply_markup=preview_kb())
         return
@@ -309,7 +309,9 @@ async def on_cb(q):
         else:
             buf = encode(img, fmt, p["quality"])
             caption = f"Готово \u2022 {fmt} \u2022 качество {p['quality']}%"
-        await q.message.answer_document(buf, filename=file_name(fmt), caption=caption)
+        await q.message.answer_document(
+            BufferedInputFile(buf.getvalue(), filename=file_name(fmt)),
+            caption=caption)
         return
     if data == "do:again":
         await q.message.answer("Выбирай дальше \U0001F3AF", reply_markup=menu_kb())
